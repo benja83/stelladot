@@ -7,7 +7,11 @@ class ConfigSetting < ActiveRecord::Base
   validate :type_value_match_data_type
 
   def type_value_match_data_type
-    if self.get_type_value != self.data_type
+    if self.data_type != "float"
+      if self.get_type_value != self.data_type
+        errors.add(:value, "don't have the same #{self.data_type} of the setting")
+      end
+    elsif self.get_type_value != "float" && self.get_type_value != "integer"
       errors.add(:value, "don't have the same #{self.data_type} of the setting")
     end
   end
