@@ -15,6 +15,7 @@ class ConfigSetting < ActiveRecord::Base
   def get_type_value
     return "integer" if /\A[0-9]*\z/ === self.value && self.value
     return "float" if /\A[0-9]*\.[0-9]*\z/ === self.value && self.value
+    return "boolean" if ("true" == self.value || "false" == self.value) && self.value
     "string"
   end
 

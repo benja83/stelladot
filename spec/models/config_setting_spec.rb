@@ -44,5 +44,10 @@ RSpec.describe ConfigSetting, :type => :model do
       setting = ConfigSetting.new name: "email",data_type: "string", value: "12.23"
       expect(setting.valid?).to equal(false)
     end
+
+    it "don't allow to record a integer in a setting with a string data_type" do
+      setting = ConfigSetting.new name: "email",data_type: "string", value: "false"
+      expect(setting.valid?).to equal(false)
+    end
   end
 end
