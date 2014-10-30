@@ -8,12 +8,13 @@ class ConfigSetting < ActiveRecord::Base
 
   def type_value_match_data_type
     if self.get_type_value != self.data_type
-      errors.add(:value, "don't have the same data_type of the setting")
+      errors.add(:value, "don't have the same #{self.data_type} of the setting")
     end
   end
 
   def get_type_value
-    return "integer" if /\A[-+]?\d+\z/ === self.value && self.value
+    return "integer" if /\A[0-9]*\z/ === self.value && self.value
+    return "float" if /\A[0-9]*\.[0-9]*\z/ === self.value && self.value
     "string"
   end
 
