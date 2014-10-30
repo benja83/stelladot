@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ConfigSetting, :type => :model do
-  context "model" do
+  context "validation model test" do
     it "don't create a setting without both field" do
       setting = ConfigSetting.new
       expect(setting.valid?).to equal(false)
