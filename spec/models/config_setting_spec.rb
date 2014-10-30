@@ -29,25 +29,49 @@ RSpec.describe ConfigSetting, :type => :model do
     end
   end
 
-  context "validation of the value" do
-    it "allows to record a string in a setting with a string data_type" do
+  context "validation of the value for a setting with a string data_type" do
+    it "allows to record a string" do
       setting = ConfigSetting.new name: "email",data_type: "string", value: "dbvbe1223"
       expect(setting.valid?).to equal(true)
     end
 
-    it "don't allow to record a integer in a setting with a string data_type" do
+    it "don't allow to record a integer" do
       setting = ConfigSetting.new name: "email",data_type: "string", value: "1223"
       expect(setting.valid?).to equal(false)
     end
 
-    it "don't allow to record a integer in a setting with a string data_type" do
+    it "don't allow to record a float" do
       setting = ConfigSetting.new name: "email",data_type: "string", value: "12.23"
       expect(setting.valid?).to equal(false)
     end
 
-    it "don't allow to record a integer in a setting with a string data_type" do
+    it "don't allow to record a boolean" do
       setting = ConfigSetting.new name: "email",data_type: "string", value: "false"
       expect(setting.valid?).to equal(false)
     end
   end
+
+  context "validation of the value for a setting with a integer data_type" do
+    it "allows to record a integer" do
+      setting = ConfigSetting.new name: "age",data_type: "integer", value: "1223"
+      expect(setting.valid?).to equal(true)
+    end
+
+    it "don't allow to record a string" do
+      setting = ConfigSetting.new name: "email",data_type: "integer", value: "dbvbe1223"
+      expect(setting.valid?).to equal(false)
+    end
+
+    it "don't allow to record a float" do
+      setting = ConfigSetting.new name: "email",data_type: "integer", value: "12.23"
+      expect(setting.valid?).to equal(false)
+    end
+
+    it "don't allow to record a boolean" do
+      setting = ConfigSetting.new name: "email",data_type: "integer", value: "false"
+      expect(setting.valid?).to equal(false)
+    end
+  end
+
+
 end
