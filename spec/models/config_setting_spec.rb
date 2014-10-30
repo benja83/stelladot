@@ -28,4 +28,16 @@ RSpec.describe ConfigSetting, :type => :model do
       expect(setting_with_data_type_not_include.valid?).to equal(false)
     end
   end
+
+  context "validation of the value" do
+    it "allows to record a string in a setting with a string data_type" do
+      setting = ConfigSetting.new name: "email",data_type: "string", value: "dbvbe1223"
+      expect(setting.valid?).to equal(true)
+    end
+
+    it "don't allow to record a integer in a setting with a string data_type" do
+      setting = ConfigSetting.new name: "email",data_type: "string", value: "1223"
+      expect(setting.valid?).to equal(false)
+    end
+  end
 end
