@@ -14,5 +14,10 @@ RSpec.describe ConfigSetting, :type => :model do
       setting_without_name = ConfigSetting.new data_type: "string"
       expect(setting_without_name.valid?).to equal(false)
     end
+    it "don't create a setting with the same name" do
+      ConfigSetting.create! name: "email",data_type: "string"
+      setting_not_unique = ConfigSetting.new name: "email",data_type: "string"
+      expect(setting_not_unique.valid?).to eql(false)
+    end
   end
 end
