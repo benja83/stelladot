@@ -23,4 +23,11 @@ class ConfigSetting < ActiveRecord::Base
     end
   end
 
+  def get_value
+    return self.value.to_i if self.data_type == "integer"
+    return true if self.data_type == "boolean" && self.value = "true"
+    return false if self.data_type == "boolean" && self.value = "false"
+    return self.value.to_f if self.data_type == "float"
+    self.value
+  end
 end
