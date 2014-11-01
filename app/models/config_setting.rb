@@ -6,7 +6,7 @@ class ConfigSetting < ActiveRecord::Base
 
   def set_data_type_available
     @data_type_available = %w(string integer float boolean)
-    @validators = []
+    @validators = {}
   end
 
   before_validation :set_data_type_available, :create_validators
@@ -34,7 +34,7 @@ class ConfigSetting < ActiveRecord::Base
 
   def create_validators
     @data_type_available.each do |element|
-      @validators << Validator.new(element)
+      @validators[element] = Validator.new(element)
     end
   end
 
