@@ -5,8 +5,6 @@ class Validator
                       "true" => "boolean",
                       "false" => "boolean"}
 
-  # str.match(pat) {|m| ...}
-
   def initialize(data_type)
     @data_type = data_type
   end

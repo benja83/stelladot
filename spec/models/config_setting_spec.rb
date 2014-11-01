@@ -117,5 +117,22 @@ RSpec.describe ConfigSetting, :type => :model do
     end
   end
 
+  context "validation of the value during update" do
+    it "don't allows to change the value with a invalid data using the set method and save" do
+      setting = ConfigSetting.create name: "price",data_type: "boolean", value: "false"
+      setting.value = "233"
+      setting.save
+      setting = ConfigSetting.last
+      expect(setting.value).to eq("false")
+    end
+
+    it "don't allows to change the value with a invalid data using the update method" do
+      setting = ConfigSetting.create name: "price",data_type: "boolean", value: "false"
+      setting.update value: "233"
+      setting = ConfigSetting.last
+      expect(setting.value).to eq("false")
+    end
+  end
+
 
 end
