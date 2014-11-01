@@ -4,16 +4,19 @@ class ConfigSetting < ActiveRecord::Base
 
   attr_accessor :value,:data_type,:validators
 
-  after_initialize :set_instance_variable,:create_validators
+  after_initialize :set_instance_variable,:set_class_variable,:create_validators
 
   def set_instance_variable
     @data_type_available = %w(string integer float boolean)
-    @validators = {}
+  end
+
+  def set_class_variable
+    @@validators = {}
   end
 
   def create_validators
     @data_type_available.each do |element|
-      @validators[element] = Validator.new(element) unless @validators[element]
+      @@validators[element] = Validator.new(element) unless @@validators[element]
     end
   end
 
