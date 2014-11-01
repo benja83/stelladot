@@ -1,4 +1,10 @@
 class Validator
+
+  @@data_type_rule = { /\A[0-9]*\z/ => "integer",
+                      /\A[0-9]*\.[0-9]*\z/ => "float",
+                      "true" => "boolean",
+                      "false" => "boolean"}
+
   def initialize(data_type)
     @data_type = data_type
   end
@@ -8,9 +14,7 @@ class Validator
   end
 
   def get_type(value)
-    return "integer" if /\A[0-9]*\z/ === value
-    return "float" if /\A[0-9]*\.[0-9]*\z/ === value
-    return "boolean" if "true" == value || "false" == value
+    @@data_type_rule.each { |key,data_type| return data_type if key === value}
     "string"
   end
 end
