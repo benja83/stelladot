@@ -140,7 +140,7 @@ RSpec.describe ConfigSetting, :type => :model do
       expect(setting.get_value).to be_a(Integer)
     end
     it "returns an boolean for a boolean field" do
-      setting = ConfigSetting.create name: "discount",data_type: "boolean", value: "false"
+      setting = ConfigSetting.create name: "discount",data_type: "boolean", value: "true"
       expect(setting.get_value).to be_an_instance_of(TrueClass)
     end
     it "returns a float for a float field" do

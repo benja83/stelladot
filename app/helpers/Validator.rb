@@ -1,6 +1,6 @@
 class Validator
 
-  @@data_type_rule = {/\A[0-9]*\z/ => "integer",
+  @@data_type_rules = {/\A[0-9]*\z/ => "integer",
                       /\A[0-9]*\.[0-9]*\z/ => "float",
                       "true" => "boolean",
                       "false" => "boolean"}
@@ -14,7 +14,7 @@ class Validator
   end
 
   def get_type(value)
-    @@data_type_rule.each { |key,data_type| return data_type if value.match(key) }
+    @@data_type_rules.each { |key,data_type| return data_type if value.match(key) }
     "string"
   end
 end
