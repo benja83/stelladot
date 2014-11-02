@@ -47,7 +47,7 @@ ConfigSetting.find(1).get_value
 
 #### - TDD
 
-I have used TDD metodologies, building before the test and after the code.
+I have used TDD methodology, building before the test and after the code.
 
 #### - REFACTORING
 
