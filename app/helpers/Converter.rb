@@ -1,6 +1,6 @@
-class Conversor
+class Converter
   
-  @@conversion_rules = {"integer" => :to_i,
+  @@convertion_rules = {"integer" => :to_i,
                         "float" => :to_f,
                         "string" => :to_s
                         }
@@ -10,7 +10,7 @@ class Conversor
   end
 
   def convert_value(value)
-    call = @@conversion_rules[@data_type]
+    call = @@convertion_rules[@data_type]
     return value.send(call) unless @data_type == "boolean"
     eval(value)
   end
