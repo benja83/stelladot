@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ConfigSetting, :type => :model do
+
+  before(:all) do
+    ActionController::Base.perform_caching = true
+  end
+
+  after(:all) do
+    ActionController::Base.perform_caching = false
+  end
+
   context "validation model test" do
     it "don't create a setting without both field" do
       setting = ConfigSetting.new
@@ -150,6 +159,20 @@ RSpec.describe ConfigSetting, :type => :model do
     it "returns a string for a string field" do
       setting = ConfigSetting.create name: "name",data_type: "string", value: "Ben"
       expect(setting.get_value).to be_a(String)
+    end
+  end
+
+  context 'get_value_cached method' do
+
+    it "write in cache the queried setting if is not stored in cache" do
+      setting = ConfigSetting.create name: "age",data_type: "integer", value: "1223"
+      age_value = setting.get_value_cached
+      expect(ConfigSetting.cache_storage.exist?("age")).to eql(true)
+    end
+    it "returns the value with the good data_type when the queried setting if is not stored in cache" do
+      setting = ConfigSetting.create name: "age",data_type: "integer", value: "1223"
+      age_value = setting.get_value_cached
+      expect(age_value == 1223).to eql(true)
     end
   end
 end
