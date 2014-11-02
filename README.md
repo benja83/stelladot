@@ -29,6 +29,20 @@ $ rake db:migrate
 $ rake spec
 ```
 
+##Getting started
+
+* Create a new setting
+
+```ruby
+ConfigSetting.create name: "setting_name",data_type: "data_type", value: "value"
+```
+
+* Get converted value
+
+```ruby
+ConfigSetting.find(1).get_value
+```
+
 ##Methodologies used for building this model
 
 #### - TDD
