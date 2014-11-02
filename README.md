@@ -54,6 +54,30 @@ Is the class responsible to validate the value that the active record model want
 
 Is the class responsible to convert the value that the active record model have to return.
 
+#### - SCALABILITY
+
+The config setting model is very easy to extend. For adding new data type for settings, you just have to add two line:
+
+* in `Validator.rb`:
+
+```ruby
+  @@data_type_rules = {/\A[0-9]*\z/ => "integer",
+                      /\A[0-9]*\.[0-9]*\z/ => "float",
+                      "true" => "boolean",
+                      "false" => "boolean"
+                      # add the regex => "new data_type"
+                      }
+```
+* in `Converter.rb`:
+
+```ruby
+    @@conversion_rules = {"integer" => :to_i,
+                        "float" => :to_f,
+                        "string" => :to_s
+                        # add data_type => method as a symbol to apply on the string store in data base
+                        }
+```
+
 ## Caching
 
 There is a branch with caching using `ActiveSupport::Cache::MemoryStore`. It's not fully tested that's why it's not merged.
