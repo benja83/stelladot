@@ -51,7 +51,7 @@ I have used TDD methodology, building before the test and after the code.
 
 #### - REFACTORING
 
-After building each funcionality and having all the test in green giving an Object-oriented programming approch.
+After building each functionality and having all the test in green giving an Object-oriented programming approach.
 
 #### - OPP
 
